@@ -1,4 +1,5 @@
 import dataFunctions from "../data/demo.js"
+import { socket_client } from "../../socket/socket.js"
 export const  demoInsert =  async (req, res) => {
     try {
       const response = dataFunctions.uploadData(req.body)
@@ -14,11 +15,11 @@ export const  demoInsert =  async (req, res) => {
 export const demoGet =  async (req, res) => {
     try {
       const listingData = await dataFunctions.getAllDocuments()
-      console.log(listingData)
+    
       return res.render('list',{message:listingData})
     } catch (error) {
         return res.status(500).json({
-            message:"Internal  server Error"
+            message:"Internal  server Error" + error
           })
     }
   }
@@ -33,5 +34,16 @@ export const demoGetByID =  async (req, res) => {
           })
     }
   }
+
+ export const communicateWithServer = (req, res) => {
+  try{
+    let isCompleted = socket_client(req.body.data)
+    res.send("TCP Handshake Successful")
+  }catch(error) {
+    return res.status(500).json({
+      message:"Internal  server Error" + error
+    })
+  }
+ }
 
 //export default demoInsert

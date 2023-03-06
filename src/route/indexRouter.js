@@ -1,9 +1,11 @@
 import express from "express";
-import {demoInsert,demoGet, demoGetByID} from '../controller/demoController.js'
+import {demoInsert,demoGet, demoGetByID, communicateWithServer} from '../controller/demoController.js'
 const indexRouter = express.Router();
 
-indexRouter.get('/', demoGet)
+indexRouter.get('/list', demoGet)
+indexRouter.get("/upload",demoInsert)
 indexRouter.post('/insert', demoInsert)
-indexRouter.get('/:id', demoGetByID)
+indexRouter.get('/list/:id', demoGetByID)
+indexRouter.post("/communicate",communicateWithServer);
 
 export default indexRouter

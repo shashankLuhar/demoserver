@@ -11,7 +11,7 @@ const dataFunctions = {
     },
     "getAllDocuments" : async () => {
         var data = []
-        data = await demoModel.find({});
+        data = await demoModel.find({}).select('-__v');
         return data
     }
 }
